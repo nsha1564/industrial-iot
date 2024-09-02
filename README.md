@@ -1,7 +1,7 @@
 # Industrial IoT Monitoring System
 The goal of this project is to build a microservices-based system that monitors industrial machines and sensors to predict failures, optimize performance, and manage maintenance schedules. 
 
-## Microservices 
+## Microservices Overview
 Below is a detailed breakdown of the microservices required for this system:
 ### 1. Sensor Data Collection Service
 **Purpose:** Collects data from various sensors deployed in the field.
@@ -86,3 +86,39 @@ Responsibilities:
 - **Configuration Management:** Use Spring Cloud Config or HashiCorp Consul for managing configuration across services.
 - **Security:** Implement security best practices using Spring Security, OAuth2, and JWT tokens for securing microservices.
 **Observability:** Implement logging (using tools like ELK Stack), monitoring (using Prometheus and Grafana), and tracing (using Zipkin or Jaeger) to ensure system observability.
+
+## 1. Sensor Data Collection Service
+**Responsibilities:**
+- Collect data from various IoT sensors deployed in the field.
+- Validate and filter incoming data.
+- Store raw data for further processing.
+- Forward sensor data to a message broker (like Kafka or RabbitMQ) for real-time processing.
+**Key Components:**
+- **Controller:** Exposes REST endpoints or MQTT topics for receiving data from sensors.
+- **Service Layer:** Handles business logic such as data validation and transformation.
+- **Repository Layer:** Manages data storage in a relational (PostgreSQL/MySQL) or NoSQL database (MongoDB).
+- **Message Producer:** Publishes validated data to a message broker for downstream processing.
+- **Configuration Management:** Uses Spring Cloud Config for centralized configuration.
+- **Security:** Uses Spring Security for securing REST endpoints.
+- **Observability:** Logging, metrics, and tracing for better monitoring and debugging.
+- **Application Gateway:** API gateway integration for centralized routing, security, and rate limiting.
+- **Configuration Management:** Externalized configuration using Spring Cloud Config.
+- **Circuit Breaker Pattern:** Resilience in communication with external systems and downstream services.
+**Design Outline:**
+- **Spring Boot Application:** Start with a Spring Boot application using Maven. Include dependencies for Spring Web, Spring Data JPA, or Spring Data MongoDB, and Spring Cloud Config.
+- **Controller Class:**
+  - Define endpoints to receive sensor data (e.g., /sensors/data).
+  - The endpoints can handle data in JSON or other suitable formats. (Content Negotiation).
+  - Interacts with downstream services through an API gateway.
+- **Service Class:**
+  - Implement the logic to validate and filter incoming sensor data. Transform data if necessary.
+  - Communicates with external services using a circuit breaker pattern.
+- **Repository Interface:** Use Spring Data JPA or MongoDB repositories for storing raw sensor data.
+- **Producer Configuration:** Set up a Kafka or RabbitMQ producer to send data to a topic or queue for the Data Processing Service.
+- **Observability Tools:**
+  - Logging: Use SLF4J with Logback or Log4j2.
+  - Metrics: Use Micrometer with Prometheus or Grafana for metrics.
+  - Tracing: Use Spring Cloud Sleuth with Zipkin or Jaeger for distributed tracing.
+- **Circuit Breaker:**
+  - Use Resilience4j or Spring Cloud Circuit Breaker to handle failures gracefully.
+- **Application Properties:** Configure your database connection, message broker details, and other configurations using application.yml or application.properties.
