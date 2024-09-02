@@ -1,9 +1,8 @@
-# Industrial iot Sample Project
-Industrial Iot Solution using Microservices Architecture
+# Industrial IoT Monitoring System
+The goal of this project is to build a microservices-based system that monitors industrial machines and sensors to predict failures, optimize performance, and manage maintenance schedules. 
 
-## Industrial IoT Monitoring System
-The goal of this project is to build a microservices-based system that monitors industrial machines and sensors to predict failures, optimize performance, and manage maintenance schedules. Below is a detailed breakdown of the microservices required for this system:
-
+## Microservices 
+Below is a detailed breakdown of the microservices required for this system:
 ### 1. Sensor Data Collection Service
 **Purpose:** Collects data from various sensors deployed in the field.
 **Responsibilities:**
