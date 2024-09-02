@@ -1,4 +1,4 @@
-# industrial-iot sample project
+# Industrial iot Sample Project
 Industrial Iot Solution using Microservices Architecture
 
 ## Industrial IoT Monitoring System
