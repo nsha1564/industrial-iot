@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/407d38d5-35b3-4193-b72b-058b32a0ac3c)
+
 # Industrial IoT Monitoring System
 The goal of this project is to build a microservices-based system that monitors industrial machines and sensors to predict failures, optimize performance, and manage maintenance schedules. 
 
