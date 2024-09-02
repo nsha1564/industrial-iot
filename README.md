@@ -93,7 +93,7 @@ Responsibilities:
 - Validate and filter incoming data.
 - Store raw data for further processing.
 - Forward sensor data to a message broker (like Kafka or RabbitMQ) for real-time processing.
-**Key Components:**
+### Key Components:
 - **Controller:** Exposes REST endpoints or MQTT topics for receiving data from sensors.
 - **Service Layer:** Handles business logic such as data validation and transformation.
 - **Repository Layer:** Manages data storage in a relational (PostgreSQL/MySQL) or NoSQL database (MongoDB).
@@ -104,7 +104,7 @@ Responsibilities:
 - **Application Gateway:** API gateway integration for centralized routing, security, and rate limiting.
 - **Configuration Management:** Externalized configuration using Spring Cloud Config.
 - **Circuit Breaker Pattern:** Resilience in communication with external systems and downstream services.
-**Design Outline:**
+### Design Outline:
 - **Spring Boot Application:** Start with a Spring Boot application using Maven. Include dependencies for Spring Web, Spring Data JPA, or Spring Data MongoDB, and Spring Cloud Config.
 - **Controller Class:**
   - Define endpoints to receive sensor data (e.g., /sensors/data).
