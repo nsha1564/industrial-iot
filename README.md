@@ -87,13 +87,13 @@ Responsibilities:
 - **Security:** Implement security best practices using Spring Security, OAuth2, and JWT tokens for securing microservices.
 **Observability:** Implement logging (using tools like ELK Stack), monitoring (using Prometheus and Grafana), and tracing (using Zipkin or Jaeger) to ensure system observability.
 
-## 1. Sensor Data Collection Service
-**Responsibilities:**
+# 1. Sensor Data Collection Service
+## Responsibilities:
 - Collect data from various IoT sensors deployed in the field.
 - Validate and filter incoming data.
 - Store raw data for further processing.
 - Forward sensor data to a message broker (like Kafka or RabbitMQ) for real-time processing.
-### Key Components:
+## Key Components:
 - **Controller:** Exposes REST endpoints or MQTT topics for receiving data from sensors.
 - **Service Layer:** Handles business logic such as data validation and transformation.
 - **Repository Layer:** Manages data storage in a relational (PostgreSQL/MySQL) or NoSQL database (MongoDB).
@@ -104,7 +104,7 @@ Responsibilities:
 - **Application Gateway:** API gateway integration for centralized routing, security, and rate limiting.
 - **Configuration Management:** Externalized configuration using Spring Cloud Config.
 - **Circuit Breaker Pattern:** Resilience in communication with external systems and downstream services.
-### Design Outline:
+## Design Outline:
 - **Spring Boot Application:** Start with a Spring Boot application using Maven. Include dependencies for Spring Web, Spring Data JPA, or Spring Data MongoDB, and Spring Cloud Config.
 - **Controller Class:**
   - Define endpoints to receive sensor data (e.g., /sensors/data).
@@ -122,3 +122,46 @@ Responsibilities:
 - **Circuit Breaker:**
   - Use Resilience4j or Spring Cloud Circuit Breaker to handle failures gracefully.
 - **Application Properties:** Configure your database connection, message broker details, and other configurations using application.yml or application.properties.
+
+# 2. Data Processing Service
+
+## Overview
+
+The **Data Processing Service** is responsible for consuming data from the message broker, performing real-time analytics to detect anomalies, and forwarding the results to other microservices such as the Alerting Service. This service will be enhanced with features for observability, configuration management, circuit breaker patterns, and API gateway integration for robust and scalable microservice architecture.
+
+## Key Responsibilities
+
+- Consume sensor data from a message broker (Kafka or RabbitMQ).
+- Perform real-time data processing and anomaly detection.
+- Apply business rules or machine learning models for data analysis.
+- Publish processed data and anomalies to downstream services like the Alerting Service.
+- Ensure resilience and fault tolerance through circuit breaker patterns.
+- Provide observability for monitoring and debugging.
+
+## Key Components
+
+1. **Consumer**: 
+   - Listens to messages from Kafka or RabbitMQ.
+   - Transforms raw sensor data for processing.
+
+2. **Processing Engine**:
+   - Applies business logic, rules, or machine learning models for anomaly detection.
+   - Optionally stores processed data for historical analysis.
+
+3. **Alert Publisher**:
+   - Sends alerts or processed data to the Alerting Service or other services.
+
+4. **Configuration Management**:
+   - Manages configuration properties centrally using Spring Cloud Config.
+
+5. **Observability Tools**:
+   - **Logging**: Uses SLF4J with Logback or Log4j2 for structured logging.
+   - **Metrics**: Integrates Micrometer with Prometheus or Grafana.
+   - **Tracing**: Uses Spring Cloud Sleuth with Zipkin or Jaeger for distributed tracing.
+
+6. **Circuit Breaker**:
+   - Utilizes Resilience4j or Spring Cloud Circuit Breaker to handle communication failures gracefully.
+
+7. **Security**:
+   - Ensures secure communication with other services and handles sensitive data properly.
+
